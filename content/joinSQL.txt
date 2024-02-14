@@ -1,0 +1,72 @@
+## Bing
+Absolutely, let's take a detailed example to understand the difference between INNER JOIN, LEFT JOIN, and RIGHT JOIN in SQL.
+Let's say we have two tables: Students and Courses.
+Students table:
+
+ID 	Name 	
+1 	Alice 	
+2 	Bob 	
+3 	Charlie 	
+
+Courses table:
+
+ID 	Course 	
+1 	Math 	
+2 	Science 	
+3 	English 	
+
+Now, let's assume that the ID in both tables represents the student ID, and the course ID represents the course that the student is taking.
+- INNER JOIN: This join returns the rows where there is a match in both tables. So, if we run the following query:
+
+SELECT Students.Name, Courses.Course
+FROM Students
+INNER JOIN Courses
+ON Students.ID = Courses.ID;
+
+The result would be:
+
+Name 	Course 	
+Alice 	Math 	
+Bob 	Science 	
+Charlie 	English 	
+
+This is because each student ID in the Students table has a matching course ID in the Courses table.
+- LEFT JOIN (or LEFT OUTER JOIN): This join returns all the rows from the left table (Students), and the matched rows from the right table (Courses).
+If there is no match, the result is NULL on the right side. If we modify the Courses table and remove the course for Bob:
+Courses table:
+
+ID 	Course 	
+1 	Math 	
+3 	English 	
+
+And run the following query:
+
+SELECT Students.Name, Courses.Course
+FROM Students
+LEFT JOIN Courses
+ON Students.ID = Courses.ID;
+
+The result would be:
+
+Name 	Course 	
+Alice 	Math 	
+Bob 	NULL 	
+Charlie 	English 	
+
+This is because there is no course in the Courses table with the ID that matches Bob's ID in the Students table.
+- RIGHT JOIN (or RIGHT OUTER JOIN): This join returns all the rows from the right table (Courses), and the matched rows from the left table (Students). If there is no match, the result is NULL on the left side. If we run the same query as above but replace LEFT JOIN with RIGHT JOIN:
+
+SELECT Students.Name, Courses.Course
+FROM Students
+RIGHT JOIN Courses
+ON Students.ID = Courses.ID;
+
+The result would be:
+
+Name 	Course 	
+Alice 	Math 	
+NULL 	Science 	
+Charlie 	English 	
+
+This is because there is no student in the Students table with an ID that matches the Science course's ID in the Courses table.
+I hope this example helps you understand the difference between INNER JOIN, LEFT JOIN, and RIGHT JOIN in SQL. Let me know if you have any more questions! 😊
